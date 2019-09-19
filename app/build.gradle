@@ -1,0 +1,85 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-kapt"
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
+
+    defaultConfig {
+        applicationId "com.poc.flickrdisplay"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "com.poc.flickrdisplay.app.EspressoTestRunner"
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //Dagger
+    implementation "com.google.dagger:dagger:$v_dagger"
+    implementation "com.google.dagger:dagger-android-support:$v_dagger"
+    kapt "com.google.dagger:dagger-compiler:$v_dagger"
+    kapt "com.google.dagger:dagger-android-processor:$v_dagger"
+
+    //Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$v_kotlin"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$v_kotlin"
+
+    //Constraint Layout
+    implementation "androidx.constraintlayout:constraintlayout:$v_contraint_layout"
+
+    //Recycler View
+    implementation "androidx.recyclerview:recyclerview:$v_recyclerview"
+
+    //retrofit
+    implementation "com.squareup.retrofit2:retrofit:$v_retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$v_retrofit"
+    implementation "com.squareup.okhttp3:logging-interceptor:$v_okhttplogger"
+
+    //RxJava
+    implementation "io.reactivex.rxjava2:rxjava:$v_rxjava"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$v_rxadapter"
+    implementation "io.reactivex.rxjava2:rxandroid:$v_rxandroid"
+
+    //Picasso
+    implementation "com.squareup.picasso:picasso:$v_picasso"
+
+    //Google Material
+    implementation "com.google.android.material:material:$v_material"
+
+    //Mockk
+    testImplementation "io.mockk:mockk:${v_mockk}"
+    testImplementation "junit:junit:${v_junit}"
+    testImplementation "com.squareup.okhttp3:logging-interceptor:$v_okhttplogger"
+
+    //Espresso
+    androidTestImplementation "androidx.test.espresso:espresso-core:$v_espresso"
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$v_espresso"
+    androidTestImplementation "androidx.test:runner:$v_testrunner"
+    androidTestImplementation "androidx.test:rules:$v_testrunner"
+    androidTestImplementation "com.squareup.okhttp3:logging-interceptor:$v_okhttplogger"
+}
+
+repositories {
+    mavenCentral()
+}

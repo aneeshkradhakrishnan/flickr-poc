@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Flickr Images</string>
+    <string name="title">Title</string>
+    <string name="flickr_photos">Flickr Photos</string>
+    <string name="id">Id</string>
+    <string name="server">Server</string>
+    <string name="owner">Owner</string>
+    <string name="secret">Secret</string>
+</resources>

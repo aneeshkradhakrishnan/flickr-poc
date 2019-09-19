@@ -1,0 +1,61 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.poc.flickrdisplay.viewmodels.MainViewModel" />
+
+        <import type="androidx.recyclerview.widget.DividerItemDecoration"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/photos_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:paddingTop="@dimen/tool_bar_size"
+            app:scrollListener="@{toolBar}"
+            app:setAdapter="@{vm.adapter}"
+            app:itemDivider="@{vm.itemDivider}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/main_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <com.poc.flickrdisplay.customviews.CollapsibleText
+            android:id="@+id/tool_bar"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/tool_bar_size"
+            android:text="@string/flickr_photos"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_large"
+            android:background="@drawable/rectangle"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/main_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{vm.title}"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:paddingTop="@dimen/margin_small"
+            android:paddingBottom="@dimen/margin_small"
+            android:maxLines="1"
+            app:layout_constraintTop_toBottomOf="@+id/photos_view"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Title"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+
