@@ -1,0 +1,73 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="photo"
+            type="com.poc.flickrdisplay.model.Photo" />
+        <variable
+            name="mainVm"
+            type="com.poc.flickrdisplay.viewmodels.MainViewModel" />
+
+        <import type="com.poc.flickrdisplay.util.PhotoSize"/>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:padding="@dimen/margin_small"
+        android:onClick="@{() -> mainVm.itemClicked(photo)}">
+
+        <ImageView
+            android:id="@+id/flickr_thumbnail"
+            android:layout_width="@dimen/photo_image_size"
+            android:layout_height="@dimen/photo_image_size"
+            app:flickr="@{photo}"
+            app:photoSize="@{PhotoSize.Q}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias=".02"/>
+
+        <TextView
+            android:id="@+id/thumbnail_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_medium"
+            android:text="@{photo.id}"
+            android:textStyle="bold"
+            android:layout_marginStart="@dimen/margin_medium"
+            app:layout_constraintStart_toEndOf="@+id/flickr_thumbnail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/flickr_thumbnail"
+            app:layout_constraintBottom_toTopOf="@+id/separator_line"
+            tools:text="flickr-photo-id"/>
+
+        <View
+            android:id="@+id/separator_line"
+            android:layout_width="0dp"
+            android:layout_height=".5dp"
+            android:background="@color/gray_color"
+            android:layout_marginStart="@dimen/margin_medium"
+            app:layout_constraintStart_toEndOf="@+id/flickr_thumbnail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/photo_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_medium"
+            android:text="@{photo.title}"
+            android:maxLines="3"
+            android:layout_marginStart="@dimen/margin_medium"
+            app:layout_constraintStart_toEndOf="@+id/flickr_thumbnail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/separator_line"
+            app:layout_constraintBottom_toBottomOf="@+id/flickr_thumbnail"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
