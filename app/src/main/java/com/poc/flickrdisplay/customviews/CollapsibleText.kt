@@ -11,9 +11,14 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 class CollapsibleText : AppCompatTextView {
+    companion object {
+        const val ORIENTATION_TOP: Int = 1
+        const val ORIENTATION_BOTTOM: Int = 1
+    }
     private var originalHeight: Int = 0
     private var originalWidth: Int = 0
     private var state: ScrollState = ScrollState.NO_SCROLLING
+    var collapseOrientation:Int ? = null
 
     var scrollListener: RecyclerView.OnScrollListener = object : RecyclerView.OnScrollListener() {
 
@@ -33,12 +38,19 @@ class CollapsibleText : AppCompatTextView {
             when (state) {
                 ScrollState.START_SCROLLING_UP -> {
                     state = ScrollState.SCROLLING_UP
-                    expand(200, originalHeight, recyclerView)
+                    when(collapseOrientation) {
+                        ORIENTATION_TOP ->  expand(200, originalHeight, recyclerView)
+                        else -> collapse(200, 0, recyclerView)
+                    }
+
                 }
 
                 ScrollState.START_SCROLLING_DOWN -> {
                     state = ScrollState.SCROLLING_DOWN
-                    collapse(200, 0, recyclerView)
+                    when(collapseOrientation) {
+                        ORIENTATION_TOP -> collapse(200, 0, recyclerView)
+                        else -> expand(200, originalHeight, recyclerView)
+                    }
                 }
             }
         }
@@ -78,10 +90,12 @@ class CollapsibleText : AppCompatTextView {
         valueAnimator.interpolator = DecelerateInterpolator()
         valueAnimator.addUpdateListener { animation ->
             this.layoutParams.height = animation.animatedValue as Int
-            recyclerView.setPadding(0, targetHeight, 0, 0)
+            when(collapseOrientation) {
+                ORIENTATION_TOP -> recyclerView.setPadding(0, targetHeight, 0, 0)
+                else -> recyclerView.setPadding(0, 0, 0, targetHeight)
+            }
             this.requestLayout()
         }
-        valueAnimator.interpolator = DecelerateInterpolator()
         valueAnimator.duration = duration.toLong()
         valueAnimator.start()
     }

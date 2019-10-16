@@ -18,7 +18,7 @@ interface FlickrService {
      */
     @GET("services/rest")
     fun getPhotos(@Query("per_page") pageSize: Int = 25,
-                  @Query("api_key") apiKey: String = "27301a31e924417bdff3688919ae16d8",
+                  @Query("api_key") apiKey: String = "203e1236211215c95a19ca8b948cc112",
                   @Query("method") method: String = "flickr.photos.getRecent",
                   @Query("format") format: String = "json",
                   @Query("nojsoncallback") noJsonCallBack: Int = 1): Single<PhotoResponse>

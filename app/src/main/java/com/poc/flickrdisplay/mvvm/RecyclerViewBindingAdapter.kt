@@ -17,8 +17,14 @@ class RecyclerViewBindingAdapter {
         }
 
         @JvmStatic
-        @BindingAdapter("scrollListener")
-        fun setScrollListener(recyclerView: RecyclerView, collapsibleText: CollapsibleText) {
+        @BindingAdapter("scrollListenerTop")
+        fun setTopScrollListener(recyclerView: RecyclerView, collapsibleText: CollapsibleText) {
+            recyclerView.addOnScrollListener(collapsibleText.scrollListener)
+        }
+
+        @JvmStatic
+        @BindingAdapter("scrollListenerBottom")
+        fun setBottomScrollListener(recyclerView: RecyclerView, collapsibleText: CollapsibleText) {
             recyclerView.addOnScrollListener(collapsibleText.scrollListener)
         }
     }
